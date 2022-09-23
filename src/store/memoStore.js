@@ -24,9 +24,35 @@ export default class MemoStore {
     makeObservable(this, {
       memos: observable,
       addMemo: action,
+      editMemo: action,
+      setWidthHeight: action,
+      setPosition: action,
+      removeMemo: action,
     });
   }
   addMemo() {
     this.memos.push(new MemoModel());
+  }
+
+  editMemo(id, content) {
+    this.memos[this.getMemoIndex(id)].content = content;
+  }
+  getMemoIndex(id) {
+    return this.memos.findIndex((memo) => memo.id === id);
+  }
+
+  setWidthHeight(id, width, height) {
+    const index = this.getMemoIndex(id);
+    this.memos[index].width = width;
+    this.memos[index].height = height;
+  }
+
+  setPosition(id, x, y) {
+    const index = this.getMemoIndex(id);
+    this.memos[index].x = x;
+    this.memos[index].y = y;
+  }
+  removeMemo(id) {
+    this.memos.splice(this.getMemoIndex(id), 1);
   }
 }
