@@ -50,10 +50,15 @@ const Memo = ({ item, Edit, setWidthHeight, setPosition, Delete }) => {
 
   const onClickDelete = useCallback(() => Delete(item.id), [Delete, item.id]);
   return (
-    <Draggable handleRef={handleRef} x={0} y={0} onMove={onChangePosition}>
+    <Draggable
+      handleRef={handleRef}
+      x={item.x}
+      y={item.y}
+      onMove={onChangePosition}
+    >
       <div
         className="memo-container"
-        style={{ width: `${250}px`, height: `${300}px` }}
+        style={{ width: `${item.width}px`, height: `${item.height}px` }}
         ref={memoContainer}
       >
         <div className="menu">
